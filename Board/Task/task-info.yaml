@@ -56,7 +56,7 @@ files:
       offset: 90
     initialized_from_dependency: false
     selected: true
-    status: Unchecked
+    status: Failed
   - offset: 206
     length: 20
     placeholder_text: TODO()
@@ -65,7 +65,7 @@ files:
       offset: 149
     initialized_from_dependency: false
     selected: true
-    status: Unchecked
+    status: Failed
   text: |+
     package board
 
@@ -447,5 +447,5 @@ files:
   visible: true
   learner_created: true
 feedback_link: https://www.coursera.org/learn/kotlin-for-java-developers/programming/7fkLn/board/discussions
-status: Unchecked
+status: Failed
 record: -1

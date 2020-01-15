@@ -14,25 +14,58 @@ open class SquareBoardImpl(override val width: Int) : SquareBoard {
         }
     }
 
+    fun getPosition(a: Int, b: Int): Int{
+
+        var pos = 0
+        for (i in 1..width){
+            if (a == i) {
+                for (j in 1..width) {
+                    if (b == j){
+                        //println("getCellorNull  : ${allCells[pos]}")
+                        return pos
+                    }
+                    pos += 1
+                }
+            }else{
+                pos += width
+            }
+        }
+        return  -1
+    }
+
 
     override fun getCellOrNull(a: Int, b: Int): Cell? {
 
         if ((a in 1..width) && (b in 1..width)){
 
-            var pos = 0
+            return allCells[getPosition(a,b)]
+
+            /*var pos = 0
             for (i in 1..width){
                 if (a == i) {
                     for (j in 1..width) {
                         if (b == j){
-                            println("getCellorNull  : ${allCells[pos]}")
+                            //println("getCellorNull  : ${allCells[pos]}")
                             return allCells[pos]
                         }
-                        pos++
+                        pos += 1
                     }
                 }else{
                     pos += width
                 }
+            }*/
+
+           /* for (i in 1..width){
+                for (j in 1..width) {
+                    if (a == i && b == j){
+                        break
+                    }
+                    pos += 1
+                }
             }
+*/
+            /*println("getCellorNull  : ${allCells[pos]}")
+            return allCells[pos]*/
         }
 
         return null
@@ -44,21 +77,32 @@ open class SquareBoardImpl(override val width: Int) : SquareBoard {
             throw IllegalArgumentException()
         }
 
-        var pos = 0
+        /*var pos = 0
         for (i in 1..width){
             if (a == i) {
                 for (j in 1..width) {
                     if (b == j){
-                        break
+                        //println("getCell  : ${allCells[pos]}")
+                        return allCells[pos]
                     }
-                    pos++
+                    pos += 1
                 }
             }else{
                 pos += width
             }
         }
-        println("getCell  : ${allCells[pos]}")
-        return allCells[pos]
+       *//* for (i in 1..width){
+            for (j in 1..width) {
+                if (a == i && b == j){
+                     break
+                }
+                pos += 1
+            }
+        }*//*
+
+        //println("getCell  : ${allCells[pos]}")
+        return allCells[pos]*/
+        return allCells[getPosition(a,b)]
     }
 
     override fun getAllCells(): Collection<Cell> {
@@ -80,11 +124,11 @@ open class SquareBoardImpl(override val width: Int) : SquareBoard {
 
             if (jRange.first < width){
                 for (j in jRange) {
-                    list.add(Cell(i, j))
+                    list.add(allCells[getPosition(i, j)])
                 }
             }else{
                 for (j in jRange.first downTo i) {
-                    list.add(Cell(i, j))
+                    list.add(allCells[getPosition(i, j)])
                 }
             }
 
@@ -92,11 +136,11 @@ open class SquareBoardImpl(override val width: Int) : SquareBoard {
 
             if (jRange.last < width){
                 for (j in jRange) {
-                    list.add(Cell(i, j))
+                    list.add(allCells[getPosition(i, j)])
                 }
             }else{
                 for (j in jRange.first..width) {
-                    list.add(Cell(i, j))
+                    list.add(allCells[getPosition(i, j)])
                 }
             }
         }
@@ -115,11 +159,11 @@ open class SquareBoardImpl(override val width: Int) : SquareBoard {
 
             if (iRange.last < width){
                 for (i in iRange) {
-                    list.add(Cell(i, j))
+                    list.add(allCells[getPosition(i, j)])
                 }
             }else{
                 for (i in iRange.first downTo j) {
-                    list.add(Cell(i, j))
+                    list.add(allCells[getPosition(i, j)])
                 }
             }
 
@@ -127,11 +171,11 @@ open class SquareBoardImpl(override val width: Int) : SquareBoard {
 
             if (iRange.last < width){
                 for (i in iRange) {
-                    list.add(Cell(i, j))
+                    list.add(allCells[getPosition(i, j)])
                 }
             }else{
                 for (i in iRange.first..width) {
-                    list.add(Cell(i, j))
+                    list.add(allCells[getPosition(i, j)])
                 }
             }
         }
@@ -141,15 +185,17 @@ open class SquareBoardImpl(override val width: Int) : SquareBoard {
 
     override fun Cell.getNeighbour(direction: Direction): Cell? {
 
+        println("Cell  : $this")
+
         return when(direction){
 
-            Direction.UP -> if (i > 1) Cell(i-1, j)
+            Direction.UP -> if (i > 1) allCells[getPosition(i,j)-width]
             else null
-            Direction.DOWN -> if (i < width) Cell(i+1, j)
+            Direction.DOWN -> if (i < width) allCells[getPosition(i,j)+width]
             else null
-            Direction.RIGHT -> if (j < width) Cell(i, j+1)
+            Direction.RIGHT -> if (j < width) allCells[getPosition(i,j)+1]
             else null
-            Direction.LEFT -> if (j > 1) Cell(i, j-1)
+            Direction.LEFT -> if (j > 1) allCells[getPosition(i,j)-1]
             else null
         }
     }
