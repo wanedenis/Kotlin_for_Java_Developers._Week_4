@@ -17,9 +17,11 @@ class TestGameBoard {
         Assert.assertEquals('a', gameBoard[1, 1])
     }
 
-    @Test
+   @Test
     fun test02Filter() {
         val gameBoard = createGameBoard<Char>(2)
+        /*println("GameBoard: {${gameBoard[1, 1]}}")
+        println("GameBoard: {${gameBoard[1, 2]}}")*/
         gameBoard[1, 1] = 'a'
         gameBoard[1, 2] = 'b'
         val cells = gameBoard.filter { it == 'a' }

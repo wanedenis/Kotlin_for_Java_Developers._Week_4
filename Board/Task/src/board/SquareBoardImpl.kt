@@ -14,7 +14,7 @@ open class SquareBoardImpl(override val width: Int) : SquareBoard {
         }
     }
 
-    fun getPosition(a: Int, b: Int): Int{
+    private fun getPosition(a: Int, b: Int): Int{
 
         var pos = 0
         for (i in 1..width){
@@ -76,6 +76,13 @@ open class SquareBoardImpl(override val width: Int) : SquareBoard {
         if ((a !in 1..width) || (b !in 1..width)){
             throw IllegalArgumentException()
         }
+
+        //println("\nparams: ( $a, $b)")
+        //println("allCells: $allCells")
+     /*   println("getPosition: ${getPosition(a, b)}")
+        val pos = getPosition(a,b)
+        println("Pos: $pos")
+        println("Cell: ${allCells[pos]}")*/
 
         /*var pos = 0
         for (i in 1..width){
